@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
@@ -46,6 +47,11 @@ class Blog extends Model
     public function ScopeStatus($q)
     {
         return $q->where('status', 1);
+    }
+    public function getCreatedAtAttribute()
+    {
+            return Carbon::parse($this->create_at)->format('j M Y');
+
     }
 
     public function ScopeSearch($q, $search)

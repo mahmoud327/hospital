@@ -32,24 +32,20 @@ class BlogController extends Controller
     {
 
         $blogs = Blog::query()
-             ->latest()
+            ->latest()
 
             ->paginate(10);
 
-            return JsonResponse::json('ok', ['data' => BlogResource::collection($blogs)]);
-
+        return JsonResponse::json('ok', ['data' => BlogResource::collection($blogs)]);
     }
 
     public function show($id)
     {
 
         $blog = Blog::query()
-        ->findorfail($id);
+            ->findorfail($id);
+        $blog->increment('views', 1);
 
-
-            return JsonResponse::json('ok', ['data' => BlogResource::make($blog)]);
-
+        return JsonResponse::json('ok', ['data' => BlogResource::make($blog)]);
     }
-
-
 }

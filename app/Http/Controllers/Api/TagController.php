@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\SubCategoryResource;
+use App\Http\Resources\TagResource;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Service;
+use App\Models\Tag;
 use App\Services\PostService;
 use App\Traits\ImageTrait;
 use ArinaSystems\JsonResponse\Facades\JsonResponse;
@@ -16,7 +18,7 @@ use ArinaSystems\JsonResponse\Facades\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class CatgoryController extends Controller
+class TagController extends Controller
 {
 
 
@@ -29,12 +31,11 @@ class CatgoryController extends Controller
     public function index()
     {
 
-        $categories = Service::query()
-            ->whereParentId(0)
+        $tags = Tag::query()
              ->latest()
             ->get();
 
-            return JsonResponse::json('ok', ['data' => CategoryResource::collection($categories)]);
+            return JsonResponse::json('ok', ['data' => TagResource::collection($tags)]);
 
     }
     public function getSubCategories($parent_id)

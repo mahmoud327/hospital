@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SubServiceController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,8 @@ Route::group([
             Route::resource('banners', BannerController::class);
 
             Route::resource('services', ServiceController::class);
+            Route::resource('tags', TagController::class);
+            
 
 
             Route::get('services/sub-categories/{parent_id?}', [SubServiceController::class, 'index'])->name('service.sub-services');

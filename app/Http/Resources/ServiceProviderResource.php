@@ -9,7 +9,7 @@ use App\Http\Resources\User\ResidenceInformationResource;
 use App\Http\Resources\User\StudyInformationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class ServiceProviderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,11 +25,6 @@ class UserResource extends JsonResource
             'first_name' => $this->first_name,
             'email' => $this->email,
             'phone'=>$this->phone,
-            'tags'=>TagResource::collection($this->whenLoaded('tags')),
-            'service'=>CategoryResource::make($this->whenLoaded('service')),
-            'token' => $this->createToken('authToken')->accessToken,
-
-
 
         ];
     }

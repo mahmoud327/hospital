@@ -33,8 +33,7 @@ class BannerController extends Controller
 
         $banners = Banner::query()
             ->latest()
-
-            ->paginate(10);
+            ->get();
 
         return JsonResponse::json('ok', ['data' => BannerResource::collection($banners)]);
     }

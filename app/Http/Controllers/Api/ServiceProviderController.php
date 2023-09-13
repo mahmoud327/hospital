@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\ServiceProviderResource;
 use App\Http\Resources\SubCategoryResource;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Service;
+use App\Models\User;
 use App\Services\PostService;
 use App\Traits\ImageTrait;
 use ArinaSystems\JsonResponse\Facades\JsonResponse;
@@ -16,7 +20,7 @@ use ArinaSystems\JsonResponse\Facades\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class CatgoryController extends Controller
+class ServiceProviderController extends Controller
 {
 
 
@@ -26,28 +30,12 @@ class CatgoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($service_id)
     {
 
-        $categories = Service::query()
-            ->whereParentId(0)
-             ->latest()
-            ->get();
+        $service_providers = User::whereServiceId($service_id)
+            ->paginate();
 
-            return JsonResponse::json('ok', ['data' => CategoryResource::collection($categories)]);
-
+        return JsonResponse::json('ok', ['data' => ServiceProviderResource::collection($service_providers)]);
     }
-    public function getSubCategories($parent_id)
-    {
-
-        $categories = Service::query()
-            ->whereParent_id($parent_id)
-            ->latest()
-            ->paginate(10);
-
-            return JsonResponse::json('ok', ['data' => SubCategoryResource::collection($categories)]);
-
-    }
-
-
 }

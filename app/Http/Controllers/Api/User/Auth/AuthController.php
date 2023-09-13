@@ -19,8 +19,15 @@ class AuthController extends Controller
     {
 
         $request['password'] = bcrypt($request->password);
-        
+
         $user = User::create($request->all());
+        if ($request->tags) {
+            $user->tags()->attach($request->tags);
+            $user->load('tags');
+        }
+        if ($request->service_id) {
+            $user->load('service');
+        }
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
     }
@@ -109,8 +116,8 @@ class AuthController extends Controller
 
     public function changePassword(Request $request)
     {
-        $this->validate($request,[
-            'old_password'=>'required'
+        $this->validate($request, [
+            'old_password' => 'required'
         ]);
 
         $user = auth()->user();
