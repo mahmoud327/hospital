@@ -26,6 +26,7 @@ class ServiceProviderResource extends JsonResource
             'tags' => TagResource::collection($this->whenLoaded('tags')),
             'service' => CategoryResource::make($this->whenLoaded('service')),
             'service_id' => $this->service_id,
+            'user' => $this->whenLoaded('user'),
             'DOB' => $this->DOB,
             'startDate' => $this->startDate,
 

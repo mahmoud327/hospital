@@ -36,7 +36,7 @@ class ServiceProviderController extends Controller
 
         $service_providers = ServiceProvider::whereServiceId($service_id)
            ->latest()
-           ->with(['service','tags'])
+           ->with(['service','tags','user'])
             ->paginate();
 
         return JsonResponse::json('ok', ['data' => ServiceProviderResource::collection($service_providers)]);
