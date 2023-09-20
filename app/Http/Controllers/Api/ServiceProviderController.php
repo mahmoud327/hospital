@@ -12,6 +12,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Service;
+use App\Models\ServiceProvider;
 use App\Models\User;
 use App\Services\PostService;
 use App\Traits\ImageTrait;
@@ -33,8 +34,9 @@ class ServiceProviderController extends Controller
     public function index($service_id)
     {
 
-        $service_providers = User::whereServiceId($service_id)
+        $service_providers = ServiceProvider::whereServiceId($service_id)
            ->latest()
+           ->with(['service','tags'])
             ->paginate();
 
         return JsonResponse::json('ok', ['data' => ServiceProviderResource::collection($service_providers)]);
