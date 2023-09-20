@@ -34,6 +34,8 @@ class RegisterRequest extends FormRequest
                 'password' => 'required|min:8|confirmed',
                 'age' => 'required|numeric',
                 'type' => 'required|in:service-provider,patient',
+                'service_id' => 'exists:services,id',
+                'startDate' => 'date|date_format:Y-m-d',
              ];
     }
 }

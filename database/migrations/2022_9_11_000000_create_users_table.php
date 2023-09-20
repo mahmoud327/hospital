@@ -18,13 +18,11 @@ return new class  extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
+            $table->tinyInteger('is_active')->default(0);
+            $table->string('longitude')->default(0);
+            $table->string('latitude')->default(0);
             $table->string('email')->unique();
             $table->string('type')->enum('patient','service-provider');
-
-            $table->unsignedBigInteger('service_id')->nullable();
-
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

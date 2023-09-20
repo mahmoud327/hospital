@@ -21,10 +21,15 @@ class ServiceProviderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'last_name' => $this->last_name,
-            'first_name' => $this->first_name,
-            'email' => $this->email,
-            'phone'=>$this->phone,
+            'num_experience' => $this->num_experience,
+            'is_staff' => $this->is_staff,
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
+            'service' => CategoryResource::make($this->whenLoaded('service')),
+            'service_id' => $this->service_id,
+            'DOB' => $this->DOB,
+            'startDate' => $this->startDate,
+
+
 
         ];
     }

@@ -32,7 +32,4 @@ Route::group(['prefix' => 'v1', 'middleware' => 'lang'], function () {
     Route::apiResource('blogs', BlogController::class);
     Route::apiResource('tags', TagController::class);
 
-
-
-
 });

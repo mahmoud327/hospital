@@ -18,7 +18,7 @@ return new class  extends Migration
             $table->id();
             $table->bigInteger('parent_id')->default(0);
             $table->tinyInteger('active')->default(1);
-            $table->text('image')->default(1);
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

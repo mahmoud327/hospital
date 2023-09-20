@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\ServiceProvider;
 use App\Models\User;
 use ArinaSystems\JsonResponse\Facades\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,13 +21,23 @@ class AuthController extends Controller
 
         $request['password'] = bcrypt($request->password);
 
-        $user = User::create($request->all());
-        if ($request->tags) {
-            $user->tags()->attach($request->tags);
-            $user->load('tags');
-        }
+
+        $user = User::create($request->except(['service_id', 'startDate', 'DOB', 'is_staff', 'num_experience']));
+
         if ($request->service_id) {
-            $user->load('service');
+            $service_provider =  ServiceProvider::create([
+                'service_id' => $request->service_id,
+                'startDate' => $request->startDate,
+                'DOB' => $request->DOB,
+                'is_staff' => $request->is_staff,
+                'num_experience' => $request->num_experience
+            ]);
+            // if ($request->tags) {
+            //     $service_provider->tags()->attach($request->tags);
+            //     $user->load('tags');
+            // }
+            $user->update(['service_provider_id' => $service_provider->id]);
+            $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
         }
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
@@ -37,10 +48,12 @@ class AuthController extends Controller
 
         $credentials = request(['email', 'password']);
         if (!auth()->attempt($credentials)) {
-
             return sendJsonError('Email or Password not correct', 401);
         }
         $user = request()->user();
+        if (!is_null($user->service_provider_id)) {
+            $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
+        }
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
     }

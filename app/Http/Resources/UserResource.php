@@ -23,10 +23,14 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'last_name' => $this->last_name,
             'first_name' => $this->first_name,
+            'type' => $this->type,
             'email' => $this->email,
             'phone'=>$this->phone,
-            'tags'=>TagResource::collection($this->whenLoaded('tags')),
-            'service'=>CategoryResource::make($this->whenLoaded('service')),
+            'is_active'=>$this->is_active,
+            'latitude'=>$this->latitude,
+            'longitude'=>$this->longitude,
+            'serviceProvider'=>ServiceProviderResource::make($this->whenLoaded('serviceProvider')),
+            'longitude'=>$this->longitude,
             'token' => $this->createToken('authToken')->accessToken,
 
 
