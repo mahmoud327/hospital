@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
                 'email' => 'required|email|unique:users',
                 'phone'         => 'required|min:11|unique:users',
                 'password' => 'required|min:8|confirmed',
-                'age' => 'required|numeric',
+                // 'age' => 'required|numeric',
                 'type' => 'required|in:service-provider,patient',
                 'service_id' => 'exists:services,id',
                 'startDate' => 'date|date_format:Y-m-d',
