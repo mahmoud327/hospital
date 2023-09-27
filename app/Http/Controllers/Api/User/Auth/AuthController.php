@@ -24,21 +24,21 @@ class AuthController extends Controller
 
         $user = User::create($request->except(['service_id', 'startDate', 'DOB', 'is_staff', 'num_experience']));
 
-        if ($request->service_id) {
-            $service_provider =  ServiceProvider::create([
-                'service_id' => $request->service_id,
-                'startDate' => $request->startDate,
-                'DOB' => $request->DOB,
-                'is_staff' => $request->is_staff,
-                'num_experience' => $request->num_experience
-            ]);
-            // if ($request->tags) {
-            //     $service_provider->tags()->attach($request->tags);
-            //     $user->load('tags');
-            // }
-            $user->update(['service_provider_id' => $service_provider->id]);
-            $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
-        }
+        // if ($request->service_id) {
+        //     $service_provider =  ServiceProvider::create([
+        //         'service_id' => $request->service_id,
+        //         'startDate' => $request->startDate,
+        //         'DOB' => $request->DOB,
+        //         'is_staff' => $request->is_staff,
+        //         'num_experience' => $request->num_experience
+        //     ]);
+        //     // if ($request->tags) {
+        //     //     $service_provider->tags()->attach($request->tags);
+        //     //     $user->load('tags');
+        //     // }
+        //     $user->update(['service_provider_id' => $service_provider->id]);
+        //     $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
+        // }
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
     }
@@ -51,9 +51,9 @@ class AuthController extends Controller
             return sendJsonError('Email or Password not correct', 401);
         }
         $user = request()->user();
-        if (!is_null($user->service_provider_id)) {
-            $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
-        }
+        // if (!is_null($user->service_provider_id)) {
+        //     $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
+        // }
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
     }
