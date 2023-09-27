@@ -36,6 +36,7 @@ class RegisterRequest extends FormRequest
                 'type' => 'required|in:service-provider,patient',
                 'service_id' => 'exists:services,id',
                 'startDate' => 'date|date_format:Y-m-d',
+                'birt_date' => 'date|date_format:Y-m-d',
              ];
     }
 }
