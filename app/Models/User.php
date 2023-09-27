@@ -24,6 +24,9 @@ class User extends Authenticatable
         'last_name',
         'first_name',
         'longitude',
+        'address',
+        'gender',
+        'birth_date',
         'latitude',
         'type',
         'service_provider_id'

@@ -18,6 +18,9 @@ return new class  extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('address')->nullable();
             $table->tinyInteger('is_active')->default(0);
             $table->string('longitude')->default(0);
             $table->string('latitude')->default(0);
