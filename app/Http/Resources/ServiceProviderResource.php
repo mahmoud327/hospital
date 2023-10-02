@@ -22,6 +22,7 @@ class ServiceProviderResource extends JsonResource
             'id' => $this->id,
             'cv' => $this->cv,
             'image' => $this->image,
+            'isActive' => $this->is_active,
             'imageCard' => $this->imageCard,
             'imageBusinessCard' => $this->imageBusinessCard,
             'IsComplateProfile'=>$this->IsComplateProfile
