@@ -19,7 +19,7 @@ return new class extends Migration
             $table->tinyInteger('is_staff')->default(0);
             $table->unsignedBigInteger('service_id')->nullable();
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->string('DOB')->nullable();
+            $table->text('cv')->nullable();
             $table->date('startDate')->nullable();
             $table->timestamps();
         });

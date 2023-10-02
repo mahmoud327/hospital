@@ -8,7 +8,6 @@ use App\Http\Resources\User\PersonalInformationResource;
 use App\Http\Resources\User\ResidenceInformationResource;
 use App\Http\Resources\User\StudyInformationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-
 class ServiceProviderResource extends JsonResource
 {
     /**
@@ -21,16 +20,11 @@ class ServiceProviderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'num_experience' => $this->num_experience,
-            'is_staff' => $this->is_staff,
-            'tags' => TagResource::collection($this->whenLoaded('tags')),
-            'service' => CategoryResource::make($this->whenLoaded('service')),
-            'service_id' => $this->service_id,
-            'user' => $this->whenLoaded('user'),
-            'DOB' => $this->DOB,
-            'startDate' => $this->startDate,
-
-
+            'cv' => $this->cv,
+            'image' => $this->image,
+            'imageCard' => $this->imageCard,
+            'imageBusinessCard' => $this->imageBusinessCard,
+            'IsComplateProfile'=>$this->IsComplateProfile
 
         ];
     }

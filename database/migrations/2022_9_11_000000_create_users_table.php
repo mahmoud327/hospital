@@ -22,6 +22,7 @@ return new class  extends Migration
             $table->date('birth_date')->nullable();
             $table->string('address')->nullable();
             $table->tinyInteger('is_active')->default(0);
+            $table->bigInteger('service_provider_id')->default(0);
             $table->string('longitude')->default(0);
             $table->string('latitude')->default(0);
             $table->string('email')->unique();

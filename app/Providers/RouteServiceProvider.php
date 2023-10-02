@@ -50,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->mapUserRoutes();
+        $this->mapServiceProviderRoutes();
 
     }
 
@@ -70,5 +71,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api/v1/user/')
             // ->namespace($this->namespace.'\Api\Customer')
             ->group(base_path('routes/api/user.php'));
+    }
+
+    protected function mapServiceProviderRoutes()
+    {
+        Route::prefix('api/v1/service-provider')
+            // ->namespace($this->namespace.'\Api\Customer')
+            ->group(base_path('routes/api/serviceProvider.php'));
     }
 }

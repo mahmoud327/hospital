@@ -33,7 +33,7 @@ class UserResource extends JsonResource
             'is_active'=>$this->is_active,
             'latitude'=>$this->latitude,
             'longitude'=>$this->longitude,
-            // 'serviceProvider'=>ServiceProviderResource::make($this->whenLoaded('serviceProvider')),
+            'serviceProvider'=>ServiceProviderResource::make($this->whenLoaded('serviceProvider')),
             'token' => $this->createToken('authToken')->accessToken,
 
 
