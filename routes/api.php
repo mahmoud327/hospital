@@ -24,7 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix' => 'v1', 'middleware' => 'lang'], function () {
-
     Route::get('services/{service_id}/service-providers', [ServiceProviderController::class, 'index']);
     Route::get('sub-services/{parent_id}', [CatgoryController::class, 'getSubCategories']);
     Route::apiResource('services', CatgoryController::class);
