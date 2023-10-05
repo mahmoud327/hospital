@@ -51,9 +51,9 @@ class AuthController extends Controller
             return sendJsonError('Email or Password not correct', 401);
         }
         $user = request()->user();
-        // if (!is_null($user->service_provider_id)) {
-        //     $user->load(['serviceProvider', 'serviceProvider.tags', 'serviceProvider.service']);
-        // }
+        if (!is_null($user->service_provider_id)) {
+            $user->load(['serviceProvider']);
+        }
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
     }
