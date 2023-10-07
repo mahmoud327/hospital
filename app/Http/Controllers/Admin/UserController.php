@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Service;
 use App\Models\User;
 use App\Traits\ImageTrait;
-use File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use File;
 
 class UserController extends Controller
 {

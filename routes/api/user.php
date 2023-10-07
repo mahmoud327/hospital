@@ -10,10 +10,11 @@ Route::prefix('auth')->group(function () {
     Route::post('resend-code', [AuthController::class, 'resendCode']);
     Route::post('verify-code', [AuthController::class, 'verifyCode']);
 
-
     Route::middleware('auth:api')->group(function () {
         Route::get('logout', 'AuthController@logout');
+        Route::get('profile-info',UserController::class,'profileInfo');
         Route::post('change-password', [AuthController::class, 'changePassword']);
         Route::post('update-profile', [AuthController::class, 'updateProfile']);
     });
 });
+
