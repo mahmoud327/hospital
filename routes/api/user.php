@@ -4,6 +4,9 @@ use App\Http\Controllers\Api\User\Auth\AuthController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('profile-info', [UserController::class, 'ProfileInfo'])
+    ->middleware('auth:api');
+
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
@@ -17,7 +20,3 @@ Route::prefix('auth')->group(function () {
         Route::post('update-profile', [AuthController::class, 'updateProfile']);
     });
 });
-
-Route::post('profile-info', [UserController::class, 'ProfileInfo'])->middleware('auth:api');
-
-
