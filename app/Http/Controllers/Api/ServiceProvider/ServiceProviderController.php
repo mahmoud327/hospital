@@ -16,7 +16,7 @@ class ServiceProviderController extends Controller
     public function profileInfo()
     {
         $user = auth()->user();
-        return JsonResponse::json('ok', ['data' => UserResource::make($user->load('serviceProvider'))]);
+        return JsonResponse::json('ok', ['data' => UserResource::make($user->load('serviceProvider','serviceProvider.service'))]);
     }
 
     public function updateProfile(Request $request)
@@ -29,6 +29,7 @@ class ServiceProviderController extends Controller
         if (!is_null(auth()->user()->service_provider_id)) {
             $service_provider =  auth()->user()->serviceProvider()->update([
                 'cv' => $request->cv,
+                'national_id' => $request->national_id,
             ]);
 
             auth()->user()->serviceProvider->clearMediaCollection('business_cards');
@@ -37,6 +38,8 @@ class ServiceProviderController extends Controller
         } else {
             $service_provider = ServiceProvider::create([
                 'cv' => $request->cv,
+                'national_id' => $request->national_id,
+
             ]);
             auth()->user()->update(['service_provider_id' => $service_provider->id]);
         }

@@ -16,14 +16,16 @@ class ServiceProviderResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    
+
     public function toArray($request)
     {
         return [
             'id' => $this->id,
             'cv' => $this->cv,
             'image' => $this->image,
+            'national_id' => $this->national_id,
             'isActive' => $this->is_active,
+            'service'=>CategoryResource::make($this->whenLoaded('service')),
             'imageCard' => $this->imageCard,
             'imageBusinessCard' => $this->imageBusinessCard,
             'IsComplateProfile'=>$this->IsComplateProfile

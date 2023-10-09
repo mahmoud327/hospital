@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,7 +52,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function serviceProvider(){
-        return $this->belongsTo(ServiceProvider::class,'service_provider_id');
+    public function serviceProvider()
+    {
+        return $this->belongsTo(ServiceProvider::class, 'service_provider_id');
+    }
+    public function getAgeAttribute()
+    {
+        // Calculate the age based on the birthdate
+        return Carbon::parse($this->birth_date)->age;
     }
 }

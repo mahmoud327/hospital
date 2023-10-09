@@ -11,8 +11,6 @@ use Laravel\Passport\HasApiTokens;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 
-
-
 class ServiceProvider extends Model implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -26,6 +24,7 @@ class ServiceProvider extends Model implements HasMedia
         'num_experience',
         'is_staff',
         'service_id',
+        'national_id',
         'startDate',
         'cv',
     ];
@@ -68,6 +67,7 @@ class ServiceProvider extends Model implements HasMedia
             && ($this->getMedia('cards'))->count()
             && ($this->getMedia('business_cards'))->count()
             && $this->cv
+            && $this->national_id
         ) {
             return true;
         }
