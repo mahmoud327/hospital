@@ -47,7 +47,7 @@ class AuthController extends Controller
             return sendJsonError('Email or Password not correct', 401);
         }
         $user = request()->user();
-        if ($user->type="service-provider") {
+        if ($user->type=="service-provider") {
             $user->load(['serviceProvider']);
         }
 
