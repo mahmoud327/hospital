@@ -1,11 +1,19 @@
 <?php
 
 use App\Http\Controllers\Api\User\Auth\AuthController;
+use App\Http\Controllers\Api\User\MedicalRecordController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('profile-info', [UserController::class, 'ProfileInfo'])
-    ->middleware('auth:api');
+Route::middleware('auth:api')->group(function () {
+
+    Route::post('profile-info', [UserController::class, 'ProfileInfo']);
+    Route::post('medical-records', [MedicalRecordController::class, 'store']);
+    Route::post('update-profile', [AuthController::class, 'updateProfile']);
+    Route::post('change-password', [AuthController::class, 'changePassword']);
+
+
+});
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
@@ -16,7 +24,5 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::get('logout', 'AuthController@logout');
 
-        Route::post('change-password', [AuthController::class, 'changePassword']);
-        Route::post('update-profile', [AuthController::class, 'updateProfile']);
     });
 });
