@@ -16,4 +16,12 @@ class MedicalRecord extends Model  implements HasMedia
         'user_id'
 
     ];
+
+    public function getImageAttribute()
+    {
+        if (($images = $this->getMedia('medical_records'))->count()) {
+            return asset(optional($this->getFirstMedia('medical_records'))->getUrl());
+        }
+        return asset('awarebox.jpeg');
+    }
 }

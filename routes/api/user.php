@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->group(function () {
 
     Route::post('profile-info', [UserController::class, 'ProfileInfo']);
-    Route::post('medical-records', [MedicalRecordController::class, 'store']);
+    Route::apiResource('medical-records',MedicalRecordController::class);
     Route::post('update-profile', [AuthController::class, 'updateProfile']);
     Route::post('change-password', [AuthController::class, 'changePassword']);
 

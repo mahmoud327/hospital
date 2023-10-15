@@ -56,6 +56,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(ServiceProvider::class, 'service_provider_id');
     }
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
     public function getAgeAttribute()
     {
         // Calculate the age based on the birthdate
