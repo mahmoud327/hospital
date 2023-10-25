@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use stdClass;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Route::group([
 
             Route::resource('services', ServiceController::class);
             Route::resource('tags', TagController::class);
-            
+
 
 
             Route::get('services/sub-categories/{parent_id?}', [SubServiceController::class, 'index'])->name('service.sub-services');

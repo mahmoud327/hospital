@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CatgoryController;
+use App\Http\Controllers\Api\MedicalTypeController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ServiceProviderController;
 use App\Http\Controllers\Api\TagController;
@@ -27,6 +28,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'lang'], function () {
     Route::get('services/{service_id}/service-providers', [ServiceProviderController::class, 'index']);
     Route::get('sub-services/{parent_id}', [CatgoryController::class, 'getSubCategories']);
     Route::apiResource('services', CatgoryController::class);
+    Route::apiResource('medical-types', MedicalTypeController::class);
     Route::apiResource('banners', BannerController::class);
     Route::apiResource('blogs', BlogController::class);
     Route::apiResource('tags', TagController::class);

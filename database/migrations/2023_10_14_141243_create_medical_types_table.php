@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medical_records', function (Blueprint $table) {
+        Schema::create('medical_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('medical_type_id');
-            $table->foreign('medical_type_id')->references('id')->on('medical_types')->onDelete('cascade');
             $table->string('name')->nullable();
-
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_records');
+        Schema::dropIfExists('medical_types');
     }
 };

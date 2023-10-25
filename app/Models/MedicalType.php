@@ -7,14 +7,12 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 
-class MedicalRecord extends Model  implements HasMedia
+class MedicalType extends Model  implements HasMedia
 {
     use  HasFactory;
     use InteractsWithMedia;
     protected $fillable = [
         'name',
-        'user_id',
-        'medical_type_id'
     ];
 
     public function getImageAttribute()
@@ -24,9 +22,4 @@ class MedicalRecord extends Model  implements HasMedia
         }
         return asset('awarebox.jpeg');
     }
-    public function medicalType()
-    {
-         return  $this->belongsTo('App\Models\medicalType');
-    }
 }
-

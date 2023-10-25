@@ -15,19 +15,23 @@ use Illuminate\Validation\Rule;
 
 class MedicalRecordController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
 
-       $records= MedicalRecord::whereUserId(auth()->id())->paginate(10);
-       return JsonResponse::json('ok', ['data' => MedicalRecordResource::collection($records)]);
-
+        $records = MedicalRecord::whereUserId(auth()->id())
+             ->with('medicalType')
+            ->when($request->medical_type_id, function ($q) use ($request) {
+                $q->whereMedicalTypeId($request->medical_type_id);
+            })->paginate(10);
+        return JsonResponse::json('ok', ['data' => MedicalRecordResource::collection($records)]);
     }
     public function store(Request $request)
     {
         $medical_record = MedicalRecord::create([
             'user_id' => auth()->id(),
-            'name' => $request->name
+            'name' => $request->name,
+            'medical_type_id' => $request->medical_type_id
         ]);
         $medical_record->addMedia($request->image)
             ->toMediaCollection('medical_records');
