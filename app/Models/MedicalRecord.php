@@ -26,7 +26,7 @@ class MedicalRecord extends Model  implements HasMedia
     }
     public function medicalType()
     {
-         return  $this->belongsTo('App\Models\medicalType');
+         return  $this->belongsTo(MedicalType::class);
     }
 }
 
