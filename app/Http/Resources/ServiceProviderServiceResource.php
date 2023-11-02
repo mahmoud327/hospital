@@ -12,6 +12,7 @@ class ServiceProviderServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'service_id' => $this->service_id,
+            'price' => $this->price,
             'service'=>CategoryResource::make($this->whenLoaded('service'))
         ];
 
