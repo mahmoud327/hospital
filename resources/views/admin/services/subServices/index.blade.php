@@ -122,10 +122,10 @@
             <div class="card-header pb-0">
 
                 <a class="modal-effect btn btn-outline-primary" data-effect="effect-scale" data-toggle="modal"
-                    href="#modaldemo8{{$parent_id}}">Add Service</a>
+                    href="#modaldemo8{{ $parent_id }}">Add Service</a>
 
 
-                    @include('admin.services.subServices.add_modal',['parent_id'=>$parent_id])
+                @include('admin.services.subServices.add_modal', ['parent_id' => $parent_id])
 
             </div>
             <div class="card-body">
@@ -150,20 +150,19 @@
                                     <td>{{ $service->name }}</td>
                                     <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2{{ $parent_id }}"
+                                            data-toggle="modal" href="#exampleModal2{{ $service->id }}"
                                             title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
 
-
-
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo9{{ $parent_id }} " title="delete">
+                                            data-toggle="modal" href="#modaldemo9{{ $service->id }} " title="delete">
                                             delete
                                         </a>
                                     </td>
                                 </tr>
                                 @include('admin.services.delete_modal', ['service' => $service])
+                                @include('admin.services.edit_modal', ['service' => $service])
                             @endforeach
                         </tbody>
                     </table>

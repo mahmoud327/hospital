@@ -24,11 +24,11 @@ class ServiceController extends Controller
     {
 
 
-        $services=Service::latest()
-        ->whereParentId(0)
-        ->paginate(10);
+        $services = Service::latest()
+            ->whereParentId(0)
+            ->paginate(10);
 
-        return view('admin.services.index',compact('services'));
+        return view('admin.services.index', compact('services'));
     }
     /**
      * Store a newly created resource in storage.
@@ -38,26 +38,30 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->uploadImage('uploads/services/',$request->file('image'));
-       $ervice= Service::create($request->all());
-        $ervice->update(['image'=>$request->image->hashName()]);
+        $this->uploadImage('uploads/services/', $request->file('image'));
+        $ervice = Service::create($request->all());
+        $ervice->update(['image' => $request->image->hashName()]);
 
         return back()->with('status', "add successfully");
     }
 
-    public function update(Request $request, Service $category)
+    public function update(Request $request, $id)
     {
+        $category = Service::find($id);
+        $category->update($request->except('image'));
+        if ($request->image) {
+            $this->uploadImage('uploads/services/', $request->file('image'));
+            $category->update(['image' => $request->image->hashName()]);
+        }
 
-        $category->update($request->all());
 
 
-        return back()->with('status', "add successfully");
+        return back()->with('status', "edit successfully");
     }
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        $category->delete();
+        $category = Service::find($id)->delete();
         return back()->with('status', "deleted successfully");
     }
-
 }

@@ -149,7 +149,7 @@
                                     <td>{{ $service->name }}</td>
                                     <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2{{ $service->id }}"
+                                            data-toggle="modal" href="#exampleModal2{{$service->id }}"
                                             title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
@@ -166,6 +166,7 @@
                                     </td>
                                 </tr>
                                 @include('admin.services.delete_modal', ['service' => $service])
+                                @include('admin.services.edit_modal', ['service' => $service])
                             @endforeach
                         </tbody>
                     </table>

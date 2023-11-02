@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('categories.update', $service->id) }}" method="post"
+                <form action="{{ route('services.update', $service) }}" method="post"
                     enctype="multipart/form-data">
                     @method('put')
                     @csrf
@@ -26,6 +26,20 @@
                             </div>
 
 
+                            <div class="control-group form-group mb-0">
+                                <label class="form-label">desc english</label>
+                                <textarea type="text" class="form-control "required name="en[desc]" placeholder="Address">
+                                    {{optional($service->translate('en'))->desc}} </textarea>
+                            </div>
+                            <div class="control-group form-group mb-0">
+                                <label class="form-label">desc arabic</label>
+                                <textarea type="text" class="form-control "required name="ar[desc]"placeholder="Address">
+                                    {{optional($service->translate('ar'))->desc}} </textarea>
+                            </div>
+
+                            <div class="control-group form-group mb-0">
+                                <input type="file" class="form-control" name="image" placeholder="Address">
+                            </div>
 
 
 

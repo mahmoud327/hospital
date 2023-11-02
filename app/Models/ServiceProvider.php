@@ -56,6 +56,10 @@ class ServiceProvider extends Model implements HasMedia
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
+    public function services()
+    {
+        return $this->belongsToMany(Service::class,'service_provider_service')->withPivot('price');
+    }
     public function user()
     {
         return $this->hasOne(User::class);
