@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Multicaret\Acquaintances\Traits\CanBeRated;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 
@@ -15,6 +16,8 @@ class ServiceProvider extends Model implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable;
     use InteractsWithMedia;
+    use CanBeRated;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +30,7 @@ class ServiceProvider extends Model implements HasMedia
         'national_id',
         'startDate',
         'cv',
+        "bio",
     ];
 
 
@@ -60,10 +64,22 @@ class ServiceProvider extends Model implements HasMedia
     {
         return $this->belongsToMany(Service::class,'service_provider_service')->withPivot('price');
     }
+    public function schedules()
+    {
+        return $this->hasMany(ServiceProviderSchedule::class);
+    }
     public function user()
     {
         return $this->hasOne(User::class);
     }
+
+
+    public function getRatesAttribute()
+    {
+        return $this->ratingsPure()->avg('relation_value') ?? 0;
+    }
+
+
 
     public function getIsComplateProfileAttribute()
     {

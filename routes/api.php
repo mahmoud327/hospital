@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::group(['prefix' => 'v1', 'middleware' => 'lang'], function () {
     Route::get('services/{service_id}/service-providers', [ServiceProviderController::class, 'index']);
+    Route::get('service-provider/{id}', [ServiceProviderController::class, 'show']);
     Route::get('sub-services/{parent_id}', [CatgoryController::class, 'getSubCategories']);
     Route::apiResource('services', CatgoryController::class);
     Route::apiResource('medical-types', MedicalTypeController::class);

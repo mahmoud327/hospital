@@ -22,13 +22,19 @@ class ServiceProviderResource extends JsonResource
         return [
             'id' => $this->id,
             'cv' => $this->cv,
+            'bio' => $this->bio,
             'image' => $this->image,
             'national_id' => $this->national_id,
             'isActive' => $this->is_active,
             'service'=>CategoryResource::make($this->whenLoaded('service')),
             'imageCard' => $this->imageCard,
             'imageBusinessCard' => $this->imageBusinessCard,
-            'IsComplateProfile'=>$this->IsComplateProfile
+            'IsComplateProfile'=>$this->IsComplateProfile,
+            "rate"=>$this->rate,
+            'services'=>ServiceResource::collection($this->whenLoaded('services')),
+            'customerReviews' => RateResource::collection($this->whenLoaded('ratingsPure')),
+            'schedules' => ScheduleResource::collection($this->whenLoaded('schedules')),
+
 
         ];
     }

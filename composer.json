@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "mcamara/laravel-localization": "^1.7",
+        "multicaret/laravel-acquaintances": "^3.5",
         "spatie/laravel-medialibrary": "^10.0.0"
     },
     "require-dev": {

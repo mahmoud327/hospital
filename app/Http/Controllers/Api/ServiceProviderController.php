@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Storage;
 class ServiceProviderController extends Controller
 {
 
-
     use ImageTrait;
     /**
      * Display a listing of the resource.
@@ -33,12 +32,17 @@ class ServiceProviderController extends Controller
      */
     public function index($service_id)
     {
-
         $service_providers = ServiceProvider::whereServiceId($service_id)
-           ->latest()
-           ->with(['service','tags','user'])
+            ->latest()
+            ->with(['service', 'tags', 'user', 'ratingsPure', 'services', 'schedules'])
             ->paginate();
 
         return JsonResponse::json('ok', ['data' => ServiceProviderResource::collection($service_providers)]);
+    }
+    public function show($service_provider_id)
+    {
+        $service_provider = ServiceProvider::findorfail($service_provider_id);
+        $service_provider->load(['service', 'tags', 'user', 'ratingsPure', 'services', 'schedules']);
+        return JsonResponse::json('ok', ['data' => ServiceProviderResource::make($service_provider)]);
     }
 }
