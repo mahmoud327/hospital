@@ -37,11 +37,15 @@ class CatgoryController extends Controller
             return JsonResponse::json('ok', ['data' => CategoryResource::collection($categories)]);
 
     }
-    public function getSubCategories($parent_id)
+    public function getSubCategories($parent_id=null)
     {
 
         $categories = Service::query()
-            ->whereParent_id($parent_id)
+             ->when($parent_id,function($q)use($parent_id){
+
+                return $q->whereParentId($parent_id);
+             })
+             ->where('parent_id','!=',0)
             ->latest()
             ->paginate(10);
 
