@@ -58,7 +58,7 @@ class ServiceController extends Controller
         }
         return sendJsonResponse([], 'service provider added service sucessfully');
     }
-    public function destory($id)
+    public function destroy($id)
     {
         ServiceProviderService::findorfail($id)->delete();
         return sendJsonResponse([], 'service provider deleted service sucessfully');
