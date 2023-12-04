@@ -10,6 +10,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('schedules ', [ScheduleController::class, 'store']);
 
     Route::post('service', [ServiceController::class, 'store']);
-    Route::get('services', [ServiceController::class, 'index']);
+    Route::apiResource('services', ServiceController::class);
+
+
 
 });

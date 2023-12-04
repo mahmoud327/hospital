@@ -27,10 +27,7 @@ class ServiceController extends Controller
     }
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'services' => 'required|array',
-        //     'price' => 'required|numeric'
-        // ]);
+
         foreach ($request->services as $service) {
             $serviceId = $service['id'];
             $price = $service['price'];
@@ -43,5 +40,27 @@ class ServiceController extends Controller
             );
         }
         return sendJsonResponse([], 'service provider added service sucessfully');
+    }
+    public function update(Request $request, $id)
+    {
+        $service =ServiceProviderService::find($id)->delete();
+
+        foreach ($request->services as $service) {
+            $serviceId = $service['id'];
+            $price = $service['price'];
+            ServiceProviderService::updateOrCreate(
+                [
+                    'service_id' => $serviceId,
+                    'service_provider_id' => auth()->user()->service_provider_id,
+                ],
+                ['price' => $price]
+            );
+        }
+        return sendJsonResponse([], 'service provider added service sucessfully');
+    }
+    public function destory($id)
+    {
+        ServiceProviderService::findorfail($id)->delete();
+        return sendJsonResponse([], 'service provider deleted service sucessfully');
     }
 }
