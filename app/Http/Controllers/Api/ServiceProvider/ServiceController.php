@@ -43,14 +43,17 @@ class ServiceController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $service = ServiceProviderService::findorfail($id);
+        $service =ServiceProviderService::findorfail($id)->delete();
 
         foreach ($request->services as $service) {
             $serviceId = $service['id'];
             $price = $service['price'];
-            $service->update( [
+            ServiceProviderService::updateOrCreate(
+                [
                     'service_id' => $serviceId,
-                    'price' => $price]
+                    'service_provider_id' => auth()->user()->service_provider_id,
+                ],
+                ['price' => $price]
             );
         }
         return sendJsonResponse([], 'service provider added service sucessfully');
