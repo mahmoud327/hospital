@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ServiceProvider\OrderController;
 use App\Http\Controllers\Api\ServiceProvider\ScheduleController;
 use App\Http\Controllers\Api\ServiceProvider\ServiceController;
 use App\Http\Controllers\Api\ServiceProvider\ServiceProviderController;
@@ -11,6 +12,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('service', [ServiceController::class, 'store']);
     Route::apiResource('services', ServiceController::class)->except('store');
+    Route::apiResource('orders', OrderController::class);
 
 
 

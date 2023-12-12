@@ -13,20 +13,18 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'service_provider_id' => $this->service_provider_id,
             'service_id' => $this->service_id,
-
-            'service_id'=>ServiceResource::make($this->whenLoaded('service')),
-            'serviceProvider'=>ServiceProviderResource::make($this->whenLoaded('serviceProvider')),
+            'service_id' => ServiceResource::make($this->whenLoaded('service')),
+            'serviceProvider' => ServiceProviderResource::make($this->whenLoaded('serviceProvider')),
+            'user' => UserDetailsResource::make($this->whenLoaded('user')),
             'status' => $this->status,
-            'note' =>$this->note,
-            'appointment' =>$this->appointment,
-            "price_negotiation"=>$this->price_negotiation,
-            "total"=>$this->total,
+            'note' => $this->note,
+            'appointment' => $this->appointment,
+            "price_negotiation" => $this->price_negotiation,
+            "total" => $this->total,
 
 
 
 
         ];
-
     }
-
 }
