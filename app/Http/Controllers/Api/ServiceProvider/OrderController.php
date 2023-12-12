@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        $orders = Order::whereServiceProvider(auth()->user()->service_provider_id)->with(['service', 'user'])
+        $orders = Order::whereServiceProviderId(auth()->user()->service_provider_id)->with(['service', 'user'])
             ->latest()->paginate(10);
 
         return JsonResponse::json('ok', ['data' => OrderResource::collection($orders)]);
