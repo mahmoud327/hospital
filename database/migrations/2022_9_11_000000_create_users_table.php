@@ -26,6 +26,7 @@ return new class  extends Migration
             $table->string('longitude')->default(0);
             $table->string('latitude')->default(0);
             $table->string('email')->unique();
+            $table->text('fcm_token')->nullable();
             $table->string('type')->enum('patient','service-provider');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

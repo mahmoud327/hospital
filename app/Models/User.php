@@ -33,6 +33,7 @@ class User extends Authenticatable
         'birth_date',
         'latitude',
         'type',
+        "fcm_token",
         'service_provider_id'
     ];
 

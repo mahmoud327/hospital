@@ -47,9 +47,10 @@ class AuthController extends Controller
             return sendJsonError('Email or Password not correct', 401);
         }
         $user = request()->user();
-        if ($user->type=="service-provider") {
+        if ($user->type == "service-provider") {
             $user->load(['serviceProvider']);
         }
+        $user->update(['fcm_token' => $request->fcm_token]);
 
         return JsonResponse::json('ok', ['data' => UserResource::make($user)]);
     }
