@@ -45,7 +45,7 @@ class Order extends Model
 
     public function serviceProvider()
     {
-        return $this->belongsTo(serviceProvider::class, 'service_provider_id');
+        return $this->belongsTo(ServiceProvider::class, 'service_provider_id');
     }
 
     /**
