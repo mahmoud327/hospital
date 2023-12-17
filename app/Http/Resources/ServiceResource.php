@@ -23,6 +23,7 @@ class ServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'price' => optional($this->pivot)->price,
+            'price_negotiation' => optional($this->pivot)->price_negotiation,
             'name' => $this->name,
 
 

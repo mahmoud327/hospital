@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use League\Glide\Server;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 
@@ -24,7 +25,6 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'service_provider_id',
-        'service_id',
         "status",
         "note",
         "appointment",
@@ -33,9 +33,9 @@ class Order extends Model
 
     ];
 
-    public function service()
+    public function services()
     {
-        return $this->belongsTo(Service::class, 'service_id');
+       return $this->belongsToMany(Service::class,'order_service')->withPivot('price');
     }
 
     public function user()

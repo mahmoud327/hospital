@@ -13,7 +13,7 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'service_provider_id' => $this->service_provider_id,
             'service_id' => $this->service_id,
-            'service_id' => ServiceResource::make($this->whenLoaded('service')),
+            'service_id' => ServiceResource::collection($this->services??[]),
             'serviceProvider' => ServiceProviderResource::make($this->whenLoaded('serviceProvider')),
             'user' => UserDetailsResource::make($this->whenLoaded('user')),
             'status' => $this->status,

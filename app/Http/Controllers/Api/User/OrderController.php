@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\OrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
+use App\Models\OrderService;
 use App\Notifications\PatientCreateOrderNotification;
 use ArinaSystems\JsonResponse\Facades\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        $orders = Order::whereUserId(auth()->id())->with(['service', 'serviceProvider'])
+        $orders = Order::whereUserId(auth()->id())->with(['services', 'serviceProvider'])
             ->latest()->paginate(10);
 
         return JsonResponse::json('ok', ['data' => OrderResource::collection($orders)]);
@@ -40,6 +41,20 @@ class OrderController extends Controller
                 'title' => $title
             ]);
         }
+
+        foreach ($request->services as $service) {
+            $serviceId = $service['id'];
+            $price = $service['price'];
+            $price_negotiation = $service['price_negotiation'];
+            OrderService::updateOrCreate(
+                [
+                    'service_id' => $serviceId,
+                    'order_id' => $order->id,
+                ],
+                ['price' => $price,"price_negotiation"=>$price_negotiation]
+            );
+        }
+
 
 
         return sendJsonResponse([], 'order created sucesfully');

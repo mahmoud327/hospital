@@ -28,7 +28,6 @@ class OrderRequest extends FormRequest
         return [
 
             'service_provider_id' => 'required|exists:service_providers,id',
-            'service_id' => 'required',
             "note" => 'nullable',
             "appointment" => 'required',
             "price_negotiation" => 'nullable',
