@@ -37,7 +37,7 @@ class OrderController extends Controller
             $order->serviceProvider->user->notify(new PatientCreateOrderNotification($order, $order->serviceProvider->user));
             $title = $user->name . " patient create order";
             $body = $user->name . " patient create order";
-            notifyByFirebase($title, $body, (array)$order->user->serviceProvider->fcm_token, [
+            notifyByFirebase($title, $body, (array)optional($order->user->serviceProvider)->fcm_token, [
                 'title' => $title
             ]);
         }
