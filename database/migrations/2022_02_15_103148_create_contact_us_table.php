@@ -18,6 +18,7 @@ class CreateContactUsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
+            $table->string('note');
             $table->boolean('is_free')->default(0);
             $table->timestamps();
         });

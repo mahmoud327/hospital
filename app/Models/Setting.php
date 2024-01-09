@@ -14,6 +14,7 @@ class Setting extends Model
        'about_us',
        'phone',
        'address',
+       "terms_conditions",
        'fb_link',
        'tw_link',
        'linkedin_link',

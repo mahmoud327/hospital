@@ -15,7 +15,7 @@ class ContactUs extends Model
         'email',
         'phone',
         'nationality_id',
-        'is_free'
+        'note'
     ];
     public function nationality()
     {

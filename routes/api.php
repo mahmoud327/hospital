@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\MedicalTypeController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ServiceProviderController;
 use App\Http\Controllers\Api\TagController;
+use App\Models\ContactUs;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +35,11 @@ Route::group(['prefix' => 'v1', 'middleware' => 'lang'], function () {
     Route::apiResource('banners', BannerController::class);
     Route::apiResource('blogs', BlogController::class);
     Route::apiResource('tags', TagController::class);
-
+    Route::get('setting', function () {
+        Setting::find(1);
+        return sendJsonResponse(Setting::find(1));
+    });
+    Route::post('contact-us', function (Request $request) {
+        return sendJsonResponse(ContactUs::create($request->all()));
+    });
 });

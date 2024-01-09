@@ -19,6 +19,7 @@ class CreateSettingsTable extends Migration {
 			$table->string('tw_link', 100)->nullable();
 			$table->string('inst_link', 100)->nullable();
 			$table->string('whatsapp_link', 100)->nullable();
+			$table->string('terms_conditions', 100)->nullable();
 			$table->string('skype_link', 100)->nullable();
 			$table->timestamps();
 

@@ -26,7 +26,6 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-
             'service_provider_id' => 'required|exists:service_providers,id',
             "note" => 'nullable',
             "appointment" => 'required',
