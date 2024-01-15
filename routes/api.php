@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CatgoryController;
+use App\Http\Controllers\Api\Chat\PrivateChatController;
 use App\Http\Controllers\Api\MedicalTypeController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ServiceProviderController;
@@ -26,6 +27,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::prefix('chat')->group(function () {
+        Route::post('send-message', [PrivateChatController::class, 'store']);
+        Route::post('load-messages', [PrivateChatController::class, 'index']);
+        Route::post('last-messages', [PrivateChatController::class, 'lastMessage']);
+        Route::delete('delete-message/{message_id}', [PrivateChatController::class, 'destroy']);
+    });
+});
+
 Route::group(['prefix' => 'v1', 'middleware' => 'lang'], function () {
     Route::get('services/{service_id}/service-providers', [ServiceProviderController::class, 'index']);
     Route::get('service-provider/{id}', [ServiceProviderController::class, 'show']);
