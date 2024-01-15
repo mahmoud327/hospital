@@ -15,7 +15,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('services', ServiceController::class)->except('store');
     Route::apiResource('orders', OrderController::class);
 
-    Route::get('notifications-read', [NotificationController::class, 'index']);
+    Route::get('notifications', [NotificationController::class, 'index']);
     Route::get('notifications-unread', [NotificationController::class, 'unread']);
     Route::post('notifications-read', [NotificationController::class, 'read']);
 
