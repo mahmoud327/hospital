@@ -20,16 +20,21 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $read = $request->query('read', 'true'); // Default to 'true' if not provided
 
-        $notificationsQuery = ($read === 'true')
-            ? $user->readNotifications()
-            : $user->unreadNotifications();
+        if ($request->has('read')) {
+            $read = $request->query('read');
+            $notificationsQuery = ($read === 'true')
+                ? $user->readNotifications()
+                : $user->unreadNotifications();
+        } else {
+            $notificationsQuery = $user->notifications();
+        }
 
         $notifications = $notificationsQuery->paginate(10);
 
         return JsonResponse::json('ok', ['data' => NotificationResource::collection($notifications)]);
     }
+
     public function read(Request $request)
     {
         $user = Auth::user();
@@ -39,9 +44,6 @@ class NotificationController extends Controller
         if ($notification) {
             $notification->markAsRead();
         }
-        return sendJsonResponse([],'as read for notifcation');
-
+        return sendJsonResponse([], 'as read for notifcation');
     }
-
-
 }
