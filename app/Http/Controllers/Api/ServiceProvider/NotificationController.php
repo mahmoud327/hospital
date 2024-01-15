@@ -20,16 +20,15 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        return JsonResponse::json('ok', ['data' => NotificationResource::collection($user->unreadNotifications()->paginate(10))]);
+        $read = $request->query('read', 'true'); // Default to 'true' if not provided
 
+        $notificationsQuery = ($read === 'true')
+            ? $user->readNotifications()
+            : $user->unreadNotifications();
 
-    }
-    public function unread(Request $request)
-    {
-        $user = auth()->user();
-        return JsonResponse::json('ok', ['data' => NotificationResource::collection($user->readNotifications()->paginate(10))]);
+        $notifications = $notificationsQuery->paginate(10);
 
-
+        return JsonResponse::json('ok', ['data' => NotificationResource::collection($notifications)]);
     }
     public function read(Request $request)
     {
