@@ -17,11 +17,11 @@ class PatientCreateOrderNotification extends Notification
      * @return void
      */
     public $order;
-    public $serviceProvider;
-    public function __construct($order, $serviceProvider)
+    public $user;
+    public function __construct($order, $user)
     {
         $this->order = $order;
-        $this->serviceProvider = $serviceProvider;
+        $this->user = $user;
     }
 
     /**
@@ -53,8 +53,7 @@ class PatientCreateOrderNotification extends Notification
     {
         return [
             'order' => $this->order,
-            'serviceProvider' => $this->serviceProvider,
-            'patient' => auth()->user(),
+            'user' => $this->user,
         ];
     }
 }

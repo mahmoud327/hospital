@@ -15,13 +15,12 @@ use Spatie\MediaLibrary\HasMedia;
 class Order extends Model
 {
     protected $table = 'orders';
-
+    protected $with=['user'];
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
     protected $fillable = [
         'user_id',
         'service_provider_id',
@@ -30,24 +29,19 @@ class Order extends Model
         "appointment",
         "price_negotiation",
         "total",
-
     ];
-
     public function services()
     {
        return $this->belongsToMany(Service::class,'order_service')->withPivot('price');
     }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
     public function serviceProvider()
     {
         return $this->belongsTo(ServiceProvider::class, 'service_provider_id');
     }
-
     /**
      * The attributes that should be hidden for serialization.
      *

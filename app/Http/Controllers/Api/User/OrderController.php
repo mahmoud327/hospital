@@ -9,10 +9,7 @@ use App\Models\Order;
 use App\Models\OrderService;
 use App\Notifications\PatientCreateOrderNotification;
 use ArinaSystems\JsonResponse\Facades\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -34,11 +31,11 @@ class OrderController extends Controller
         $order = Order::create($input);
 
         if ($order->serviceProvider->user) {
-            $order->serviceProvider->user->notify(new PatientCreateOrderNotification($order, $order->serviceProvider->user));
+            $order->serviceProvider->user->notify(new PatientCreateOrderNotification($order, $order->user));
             $title = $user->name . " patient create order";
             $body = $user->name . " patient create order";
-            notifyByFirebase($title, $body, (array)optional($order->serviceProvider->user)->fcm_token, [
-                'title' => $title
+            notifyByFirebase($title, $body, (array) optional($order->serviceProvider->user)->fcm_token, [
+                'title' => $title,
             ]);
         }
 
@@ -51,11 +48,9 @@ class OrderController extends Controller
                     'service_id' => $serviceId,
                     'order_id' => $order->id,
                 ],
-                ['price' => $price,"price_negotiation"=>$price_negotiation]
+                ['price' => $price, "price_negotiation" => $price_negotiation]
             );
         }
-
-
 
         return sendJsonResponse([], 'order created sucesfully');
     }
