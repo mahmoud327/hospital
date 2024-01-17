@@ -53,7 +53,7 @@ class PatientCreateOrderNotification extends Notification
     {
         return [
             'order' => $this->order,
-            'user' => $this->user,
+            'user' => auth()->user(),
         ];
     }
 }
